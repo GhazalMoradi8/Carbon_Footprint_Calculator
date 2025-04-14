@@ -120,13 +120,13 @@ def format_activity_name(activity_key):
         "km_electric_passenger_train_traveled": "Electric Train (km)", "km_bus_traveled": "Bus (km)",
         "km_petrol_car_traveled": "Petrol Car (km)", "km_Motorcycle_traveled": "Motorcycle (km)",
         "km_ev_scooter_traveled": "E-Scooter (km)", "km_ev_car_traveled": "Electric Car (km)",
-        "diesel_car_traveled": "Diesel Car (km)", "beef_products_consumed": "Beef Products (€)",
-        "poultry_products_consumed": "Poultry Products (€)", "pork_products_consumed": "Pork Products (€)",
-        "fish_products_consumed": "Fish Products (€)", "other_meat_products_consumed": "Other Meat (€)",
-        "processed_rice_consumed": "Rice (€)", "sugar_consumed": "Sugar (€)",
-        "vegetable_oils_fats_consumed": "Veg Oils/Fats (€)", "dairy_products_consumed": "Dairy Products (€)",
-        "other_food_products_consumed": "Other Food (€)", "beverages_consumed": "Beverages (€)", "water_consumed": "Water Consumed (m³)",
-        "electricity_used": "Electricity Used (kWh)", "hotel_stay": "Hotel Nights",
+        "diesel_car_traveled": "Diesel Car (km)", "beef_products_consumed": "Beef Products (euro)",
+        "poultry_products_consumed": "Poultry Products (euro)", "pork_products_consumed": "Pork Products (euro)",
+        "fish_products_consumed": "Fish Products (euro)", "other_meat_products_consumed": "Other Meat (euro)",
+        "processed_rice_consumed": "Rice (euro)", "sugar_consumed": "Sugar (euro)",
+        "vegetable_oils_fats_consumed": "Veg Oils/Fats (euro)", "dairy_products_consumed": "Dairy Products (euro)",
+        "other_food_products_consumed": "Other Food (euro)", "water_consumed": "Water Consumed (m3)",
+        "electricity_used": "Electricity Used (kWh)", "hotel_stay": "Hotel Nights (room-night)",
     }
     return mapping.get(activity_key, activity_key.replace("_", " ").capitalize())
 
@@ -200,9 +200,9 @@ if st.session_state.selected_country != "-- Select --":
                 # st.error(f"Calc error for {label}: {e}")
                 st.session_state.emission_values[activity] = 0.0
 
-    # Define Activity Lists 
+    # Define Activity Lists
     transport_activities = ["Domestic_flight_traveled", "International_flight_traveled", "km_diesel_local_passenger_train_traveled", "km_diesel_long_distance_passenger_train_traveled", "km_electric_passenger_train_traveled", "km_bus_traveled", "km_petrol_car_traveled", "diesel_car_traveled", "km_Motorcycle_traveled", "km_ev_scooter_traveled", "km_ev_car_traveled"]
-    food_activities = ["beef_products_consumed", "poultry_products_consumed", "pork_products_consumed", "fish_products_consumed", "other_meat_products_consumed", "dairy_products_consumed", "processed_rice_consumed", "sugar_consumed", "vegetable_oils_fats_consumed", "beverages_consumed", "other_food_products_consumed"]
+    food_activities = ["beef_products_consumed", "poultry_products_consumed", "pork_products_consumed", "fish_products_consumed", "other_meat_products_consumed", "dairy_products_consumed", "processed_rice_consumed", "sugar_consumed", "vegetable_oils_fats_consumed", "other_food_products_consumed"]
     energy_water_activities = ["electricity_used", "water_consumed"]
     hotel_activities = ["hotel_stay"]
 
@@ -267,10 +267,10 @@ if st.session_state.selected_country != "-- Select --":
         total_emission = st.session_state.get('calculated_emission', 0)
         if total_emission > 0:
             st.metric(label="kg CO₂ equivalent", value=f"{total_emission:.1f}")
-
-             # Tree equivalent
-        trees_cut = total_emission / 21.77
-        st.markdown(f"\U0001F333 **That’s equivalent to cutting down ~{trees_cut:.0f} trees!**")
+            tree_absorb_monthly = (21.77 / 12.0)
+            if tree_absorb_monthly > 0:
+                 trees_monthly_equiv = total_emission / tree_absorb_monthly
+                 st.markdown(f"Equivalent to CO₂ absorbed by **{trees_monthly_equiv:.1f} trees** in a month.")
 
             st.divider()
             st.subheader("📈 Comparison with Averages")
