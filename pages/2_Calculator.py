@@ -267,10 +267,10 @@ if st.session_state.selected_country != "-- Select --":
         total_emission = st.session_state.get('calculated_emission', 0)
         if total_emission > 0:
             st.metric(label="kg CO₂ equivalent", value=f"{total_emission:.1f}")
-            tree_absorb_monthly = (21.77 / 12.0)
-            if tree_absorb_monthly > 0:
-                 trees_monthly_equiv = total_emission / tree_absorb_monthly
-                 st.markdown(f"Equivalent to CO₂ absorbed by **{trees_monthly_equiv:.1f} trees** in a month.")
+
+             # Tree equivalent
+        trees_cut = total_emission / 21.77
+        st.markdown(f"\U0001F333 **That’s equivalent to cutting down ~{trees_cut:.0f} trees!**")
 
             st.divider()
             st.subheader("📈 Comparison with Averages")
