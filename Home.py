@@ -1,37 +1,46 @@
 import streamlit as st
 
 # --- App Config ---
-st.set_page_config(
-    page_title="Green Tomorrow",
-    page_icon="🌿",
-    layout="centered"
-)
-
-# --- Custom Sidebar Logo + Background ---
-st.markdown(
-    """
+st.markdown("""
     <style>
-        [data-testid="stSidebar"]::before {
-            content: "";
-            display: block;
-            background-image: url('https://raw.githubusercontent.com/GhazalMoradi8/Carbon_Footprint_Calculator/main/GreenPrint_logo.png');
-            background-size: 90% auto;
-            background-repeat: no-repeat;
-            background-position: center;
-            height: 140px;
-            margin: 1.5rem auto -4rem auto;
+        /* --- Styling for all buttons --- */
+        div[data-testid="stButton"] button {
+            background-color: #61c2a2;  /* Green background */
+            color: white;               /* White text */
+            border: none;
+            padding: 0.5rem 1rem;       /* Adjust padding */
+            border-radius: 0.25rem;
+            cursor: pointer;
         }
-        section[data-testid="stSidebar"] {
-            background-color: #d6f5ec;
+
+        div[data-testid="stButton"] button:hover {
+            background-color: #52a58a;  /* Darker green on hover */
         }
-        .stApp {
-            background-color: white;
+
+        div[data-testid="stButton"] button:focus {
+            outline: none;              /* Remove the default focus outline */
+            box-shadow: 0 0 0 0.3rem rgba(26, 152, 80, 0.5); /* Green shadow on focus */
+        }
+
+        /* Apply custom styles to the form submit button specifically */
+        div[data-testid="stFormSubmitButton"] button {
+            background-color: #61c2a2;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+        }
+
+        div[data-testid="stFormSubmitButton"] button:hover {
+            background-color: #52a58a;
+        }
+
+        div[data-testid="stFormSubmitButton"] button:focus {
+            outline: none;
+            box-shadow: 0 0 0 0.3rem rgba(26, 152, 80, 0.5);
         }
     </style>
-    """,
-    unsafe_allow_html=True
-)
-
+""", unsafe_allow_html=True)
 # --- Page Title ---
 st.title("Welcome to GreenPrint")
 st.subheader("Your Personal Carbon Footprint Tracker")
