@@ -30,6 +30,19 @@ st.markdown(
         .stApp {
             background-color: white;
         }
+        
+        /* --- Styling for the Next and Previous buttons --- */
+        div[data-testid="stButton"] button {
+            background-color: #61c2a2;  /* Green background */
+            color: white;              /* White text */
+            border: none;
+            padding: 0.5rem 1rem;      /* Adjust padding */
+            border-radius: 0.25rem;
+        }
+        div[data-testid="stButton"] button:hover {
+            background-color: #52a58a;  /* Darker green on hover */
+        }
+
     </style>
     """,
     unsafe_allow_html=True
