@@ -9,28 +9,41 @@ st.set_page_config(
 )
 
 # --- Force Logo to Appear at Top of Sidebar ---
-st.markdown(
-    """
+st.markdown("""
     <style>
+        /* --- Sidebar Logo --- */
         [data-testid="stSidebar"]::before {
-            content: "";
-            display: block;
+            content: ""; display: block;
             background-image: url('https://raw.githubusercontent.com/GhazalMoradi8/Carbon_Footprint_Calculator/main/GreenPrint_logo.png');
-            background-size: 90% auto;
-            background-repeat: no-repeat;
-            background-position: center;
-            height: 140px;
-            margin: 1.5rem auto -4rem auto;  /* SUPER tight top & bottom spacing */
+            background-size: 90% auto; background-repeat: no-repeat;
+            background-position: center; height: 140px;
+            margin: 1.5rem auto -4rem auto;
+        }
+        section[data-testid="stSidebar"] { background-color: #d6f5ec; }
+        .stApp { background-color: white; }
+
+        /* --- Tab-like Radio Buttons --- */
+        div[role="radiogroup"] > label > div:first-child { display: none; }
+        div[role="radiogroup"] > label {
+            margin: 0 !important; padding: 0.5rem 1rem; border: 1px solid #ddd;
+            border-bottom: none; border-radius: 5px 5px 0 0; background-color: #f0f2f6;
+            cursor: pointer; transition: background-color 0.3s ease;
+        }
+        div[role="radiogroup"] > label:hover { background-color: #e0e2e6; }
+
+        /* --- Control the color of the selected tab --- */
+        div[role="radiogroup"] input[type="radio"]:checked + label {
+            background-color: #f0f2f6;
+            font-weight: bold;
+            color: #52a58a;  /* Change the color of selected tab text (Green in this case) */
         }
 
-        section[data-testid="stSidebar"] {
-            background-color: #d6f5ec;
+        /* --- Add bottom border for tabs container --- */
+        div.stRadio > div {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 1rem;
         }
 
-        .stApp {
-            background-color: white;
-        }
-        
         /* --- Styling for the Next and Previous buttons --- */
         div[data-testid="stButton"] button {
             background-color: #61c2a2;  /* Green background */
@@ -43,10 +56,14 @@ st.markdown(
             background-color: #52a58a;  /* Darker green on hover */
         }
 
+        /* Focus state for buttons */
+        div[data-testid="stButton"] button:focus {
+            outline: none;  /* Remove the default focus outline */
+            box-shadow: 0 0 0 0.3rem rgba(26, 152, 80, 0.5); /* Green shadow on focus */
+        }
+
     </style>
-    """,
-    unsafe_allow_html=True
-)
+""", unsafe_allow_html=True)
 
 # ✅ Fixed Email Validation
 def is_valid_email(email):
