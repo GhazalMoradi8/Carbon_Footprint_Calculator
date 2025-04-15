@@ -1,6 +1,10 @@
 import streamlit as st
 
 # --- App Config ---
+
+# --- App Config ---
+st.set_page_config(page_title="GreenPrint", page_icon="🌿", layout="centered")
+
 st.markdown("""
     <style>
         /* --- Styling for all buttons --- */
